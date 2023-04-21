@@ -1,10 +1,9 @@
 <script lang="ts">
     import Post from '$lib/components/Post.svelte';
 	import type { TableOfContentItems } from '$lib/types';
-    import type { PageData } from './$types';
     import { MetaTags, JsonLd } from 'svelte-meta-tags';
     
-    export let data: PageData;
+    export let data;
     let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
 
     $: tableOfContent = data?.blocks?.map((block)=>{
