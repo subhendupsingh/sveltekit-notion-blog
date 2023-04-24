@@ -41,7 +41,7 @@
             {/if}
 
             <TableOfContent {tableOfContent} />
-
+            
             {#each blocks as block}
                 <div class="my-4">
                     <Block {block} />

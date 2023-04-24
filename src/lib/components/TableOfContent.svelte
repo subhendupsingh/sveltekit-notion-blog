@@ -1,10 +1,9 @@
 <script lang="ts">
 	import type { TableOfContentItems } from "$lib/types";
     export let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
-    
 </script>
 
-{#if tableOfContent && tableOfContent.length > 0 && !tableOfContent?.some((s)=> s==null)}
+{#if tableOfContent && tableOfContent?.length > 0}
     <ul class="bg-slate-100 rounded-md w-full py-6 list-none">
         {#each  tableOfContent as content }
             {#if content}
