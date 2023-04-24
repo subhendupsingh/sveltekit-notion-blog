@@ -1,20 +1,21 @@
-import { NOTION_TOKEN } from "$env/static/private";
+import type { BlogClient } from "$lib";
 import type { FAQ } from "$lib/types";
-import { Client, APIErrorCode, type NotionClientError, isNotionClientError, ClientErrorCode, isFullPage, isFullBlock } from "@notionhq/client";
-import type { BlockObjectResponse, PageObjectResponse, PartialPageObjectResponse, UserObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { Client, APIErrorCode, isNotionClientError, ClientErrorCode, isFullPage, isFullBlock } from "@notionhq/client";
+import type { BlockObjectResponse, PageObjectResponse, UserObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { ok, err, Result } from 'neverthrow';
 
 type ErrorResult = { code: number, message: string };
 
-// Initializing a client
-export const notion = new Client({
-  auth: NOTION_TOKEN,
-});
-
-export const getDatabaseById = async (databaseId: string): Promise<Result<(PageObjectResponse)[], ErrorResult>> => {
+export const getDatabaseById = async (blogClient: BlogClient): Promise<Result<(PageObjectResponse)[], ErrorResult>> => {
     try {
+        const notion = blogClient.client;
+
+        if(!notion){
+            return err({code: 400, message: "Invalid or missing notion secret"});
+        }
+        
         const database = await notion.databases.query({
-            database_id: databaseId,
+            database_id: blogClient.config.databaseId,
             filter: {
                 property: "Published",
                 checkbox: {
@@ -24,7 +25,6 @@ export const getDatabaseById = async (databaseId: string): Promise<Result<(PageO
         });
 
         const results = database.results;
-        //console.log("results", results);
         
         if(isPageObjectResponse(results) && results?.length > 0){
             const result : PageObjectResponse[] = results;
@@ -37,10 +37,17 @@ export const getDatabaseById = async (databaseId: string): Promise<Result<(PageO
     }
 }
 
-export const getPageBySlug = async (databaseId: string, slug: string): Promise<Result<PageObjectResponse[], ErrorResult>> =>{
+export const getPageBySlug = async (blogClient: BlogClient, slug: string): Promise<Result<PageObjectResponse[], ErrorResult>> =>{
     try {
+        const notion = blogClient.client;
+
+        if(!notion){
+            return err({code: 400, message: "Invalid or missing notion secret"});
+        }
+
         const res = await notion.databases.query({
-            database_id: databaseId,
+            database_id: blogClient.config.databaseId,
+
             filter: {
                 property: "Slug",
                 rich_text: {
@@ -70,7 +77,13 @@ export const getPageBySlug = async (databaseId: string, slug: string): Promise<R
     }
 }
 
-export const getBlocks = async (blockId: string): Promise<Result<BlockObjectResponse[], ErrorResult>> => {
+export const getBlocks = async (blogClient: BlogClient,  blockId: string): Promise<Result<BlockObjectResponse[], ErrorResult>> => {
+    const notion = blogClient.client;
+
+    if(!notion){
+        return err({code: 400, message: "Invalid or missing notion secret"});
+    }
+
     const { results } = await notion.blocks.children.list({
         block_id: blockId,
         page_size: 50,
@@ -113,8 +126,14 @@ function isPageObjectResponse(response: any) : response is PageObjectResponse[] 
     return (response as PageObjectResponse[])?.[0]?.properties!==null && (response as PageObjectResponse[])?.[0]?.properties!==undefined;
 }
 
-export const getNotionUser = async (userId: string): Promise<Result<UserObjectResponse, ErrorResult>> => {
+export const getNotionUser = async (blogClient: BlogClient, userId: string): Promise<Result<UserObjectResponse, ErrorResult>> => {
     try {
+        const notion = blogClient.client;
+
+        if(!notion){
+            return err({code: 400, message: "Invalid or missing notion secret"});
+        }
+
         const response = await notion.users.retrieve({user_id: userId});
         if(response){
             return ok(response)
@@ -126,8 +145,8 @@ export const getNotionUser = async (userId: string): Promise<Result<UserObjectRe
     }
 }
 
-export const getFAQs = async (id: string): Promise<Result<FAQ[], ErrorResult>> => {
-    const response = await getBlocks(id);
+export const getFAQs = async (blogClent: BlogClient, id: string): Promise<Result<FAQ[], ErrorResult>> => {
+    const response = await getBlocks(blogClent, id);
 
     if(response.isOk()){
         const faqs: FAQ[] = response.value.map((row)=>{
