@@ -1,10 +1,10 @@
+import type { ServerLoadEvent } from '@sveltejs/kit';
 export declare const config: {
     isr: {
         expiration: number;
-        bypassToken: any;
     };
 };
-export declare const load: (event: any) => Promise<{
+export declare const load: (event: ServerLoadEvent) => Promise<{
     error: {
         code: number;
         message: string;
