@@ -1,6 +1,5 @@
 import { Client, isFullUser } from "@notionhq/client";
 import { getBlocks, getDatabaseById, getFAQs, getPageBySlug } from "./notion/api";
-import { PUBLIC_NOTION_TOKEN } from "$env/static/public";
 import type { ServerLoadEvent } from "@sveltejs/kit";
 import BlogPost from "$lib/components/BlogPost.svelte";
 import PostsList from "$lib/components/PostsList.svelte";

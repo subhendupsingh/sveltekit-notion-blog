@@ -1,4 +1,4 @@
-import { getAllPosts, initNotion } from '$lib';
+import { getAllPosts } from '$lib';
 
 export const config = {
     isr: {

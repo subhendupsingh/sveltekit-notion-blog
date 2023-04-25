@@ -1,58 +1,79 @@
-# create-svelte
+# Introduction
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is a plug and play library for [`Sveltekit`](https://kit.svelte.dev/) projects to create blogs quickly in your website's subdirectory using [`Notion`](https://www.notion.so/) as a CMS.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Getting started
 
-## Creating a project
+### Notion Setup
+1. Duplicate this [`Notion template`] into your workspace.
+2. Create an internal Notion connection from the settings [(Link)](https://www.notion.so/my-integrations), Notion's documentation on how to create an internal connection [(link)] (https://developers.notion.com/docs/create-a-notion-integration)
+3. Connect the newly created connection with the blogs template duplicated in step 1 by clicking on the 3 dots on top-right. Then click on **Add Connections** and search for the connection you created in the step 3. Done!
+4. New blogs will be added in the **Blogs** page of the template.
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Initialize the library in the root +layout.ts
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
+    import { PUBLIC_NOTION_DATABASE_ID, PUBLIC_NOTION_TOKEN } from "$env/static/public";
+    import { initNotion } from "sveltekit-notion-blog";
 
-# create a new project in my-app
-npm create svelte@latest my-app
+    export const prerender = true;
+
+    initNotion({
+        databaseId: PUBLIC_NOTION_DATABASE_ID, //from .env
+        notionToken: PUBLIC_NOTION_TOKEN, //from .env
+    });
 ```
 
-## Developing
+### Code Setup
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. Install the package
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+    npm i sveltekit-notion-blog
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
-
-## Building
-
-To build your library:
+2. In your existing project, create a subdirectory names **blog** and create ```+page.svelte``` and ```+page.server.ts``` files in this directory and call the _getAllPosts_ method in the ```+page.server.ts```
 
 ```bash
-npm run package
+    import type { PageServerLoad } from './$types';
+    import { getAllPosts } from "sveltekit-notion-blog";
+    export const load: PageServerLoad = () => getAllPosts();
 ```
 
-To create a production version of your showcase app:
+3. In the ```+page.svelte```, import the ```PostsList`` component
 
 ```bash
-npm run build
+    <script lang="ts">
+        import type { PageData } from './$types';
+        import { PostsList } from "sveltekit-notion-blog";
+        export let data: PageData;
+    </script>
+
+    <div class="max-w-4xl m-auto">
+        <PostsList {data} />
+    </div>
 ```
 
-You can preview the production build with `npm run preview`.
+4. Create a new directory inside the blog directory named **[slug]** and create ```+page.svelte``` and ```+page.server.ts``` files in this directory.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
+5. In the ```+page.server.ts``` call the **getBlogPageBySlug** method
 
 ```bash
-npm publish
+    import type { ServerLoadEvent } from '@sveltejs/kit';
+    import { getBlogPageBySlug } from 'sveltekit-notion-blog';
+
+    export const load = (event: ServerLoadEvent) => getBlogPageBySlug(event);
+```
+
+6. In the ```+page.svelte```
+
+```bash
+<script lang="ts">
+    import { BlogPost } from 'sveltekit-notion-blog';
+    import type { PageData } from './$types';
+    
+    export let data: PageData;
+</script>
+
+<BlogPost {data} />
 ```

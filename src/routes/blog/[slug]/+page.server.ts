@@ -1,13 +1,12 @@
-import { BYPASS_TOKEN } from '$env/static/private';
 import { getBlogPageBySlug } from '$lib';
+import type { ServerLoadEvent } from '@sveltejs/kit';
 
 export const config = {
     isr: {
         expiration: 60,
-        bypassToken: BYPASS_TOKEN
     }
 };
 
-export const load = (event) => getBlogPageBySlug(event);
+export const load = (event: ServerLoadEvent) => getBlogPageBySlug(event);
 
    
