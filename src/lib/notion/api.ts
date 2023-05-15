@@ -86,7 +86,7 @@ export const getBlocks = async (blogClient: BlogClient,  blockId: string): Promi
 
     const { results } = await notion.blocks.children.list({
         block_id: blockId,
-        page_size: 50,
+        page_size: 100,
     });
 
     let blocks: BlockObjectResponse[] = [];
