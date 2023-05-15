@@ -59,7 +59,8 @@
 	"dependencies": {
 		"@notionhq/client": "^2.2.4",
 		"@unpic/svelte": "^0.0.17",
-		"neverthrow": "^6.0.0"
+		"neverthrow": "^6.0.0",
+		"sveltekit-embed": "^0.0.12"
 	},
 	"homepage": "https://iridescent-gingersnap-952901.netlify.app/",
 	"description": "A plug and play library for setting up blogs in subdirectory or main directory in Sveltekit projects using Notion as CMS.",

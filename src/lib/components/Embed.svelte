@@ -1,18 +1,41 @@
 <script lang="ts">
 	import type { EmbedBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
     export let block:  EmbedBlockObjectResponse;
+    import { GenericEmbed } from 'sveltekit-embed'
 
-    //$: url = block?.embed?.url;
+   // $: if(block?.embed?.url) {fetchEmbedMetas(block?.embed?.url);}
 
     const isImage = (url: string) => {
         return url.indexOf(".jpg") >=0 || url.indexOf(".png") >=0 || url.indexOf(".jpeg") >=0 || url.indexOf(".webp") >=0 || url.indexOf(".avif") >=0
     }
 
+    let title: string, description: string, image: string, isEmbedImage: boolean = false;
+
     const fetchEmbedMetas = async (url: string) => {
-        const response = await fetch(`https://api.dub.sh/metatags?url=${url}`)
+        isEmbedImage = isImage(url);
+        console.log("url", url, "isEmbedImage",isEmbedImage);
+        
+        if(isEmbedImage){
+            return url;
+        }
+
+        const response = await fetch(`https://api.dub.sh/metatags?url=${url}`, {
+            mode: "no-cors",
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+
+        console.log("response", response);
+        
         
         if(response.ok){
-            return response.json();
+            const json = await response.json();
+            console.log(json);
+            
+            title =  json?.title;
+            description = json?.description,
+            image = json?.image;
         }else{
             return url;
         }
@@ -23,16 +46,6 @@
     {#if isImage(block.embed.url)}
         <img src={block.embed.url} alt={block.embed.caption?.join(" ")} />
     {:else}
-        {#await fetchEmbedMetas(block.embed.url)}
-            Generating Embed...
-        {:then {title, description, image}} 
-            <div class="flex flex-col overflow-hidden rounded-md border border-gray-300 bg-gray-50">
-                <img src={image} alt={description} class="h-[250px] w-full border-b border-gray-300 object-cover" />
-                <div class="flex flex-col bg-slate-50 gap-1">
-                    <b class="text-sm text-[#536471]">{title}</b>
-                    <p class="line-clamp-2 text-sm text-[#536471]">{description}</p>
-                </div>
-            </div>
-        {/await}
+        <GenericEmbed src={block.embed.url} />
     {/if}
 {/if}
