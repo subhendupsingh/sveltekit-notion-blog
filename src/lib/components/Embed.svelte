@@ -46,6 +46,8 @@
     {#if isImage(block.embed.url)}
         <img src={block.embed.url} alt={block.embed.caption?.join(" ")} />
     {:else}
-        <GenericEmbed src={block.embed.url} />
+        <a href={block.embed.url} target="_blank">
+            <GenericEmbed src={block.embed.url} />
+        </a>
     {/if}
 {/if}
