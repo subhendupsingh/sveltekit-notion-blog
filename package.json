@@ -46,7 +46,6 @@
 		"publint": "^0.1.9",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
-		"svelte-meta-tags": "^2.7.0",
 		"svelte-preprocess": "^4.10.7",
 		"tailwindcss": "^3.1.5",
 		"tslib": "^2.4.1",
@@ -60,6 +59,7 @@
 		"@notionhq/client": "^2.2.4",
 		"@unpic/svelte": "^0.0.17",
 		"neverthrow": "^6.0.0",
+		"svelte-meta-tags": "^2.8.0",
 		"sveltekit-embed": "^0.0.12"
 	},
 	"homepage": "https://iridescent-gingersnap-952901.netlify.app/",
