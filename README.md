@@ -24,7 +24,7 @@ This is a plug and play library for [`Sveltekit`](https://kit.svelte.dev/) proje
 
 ```bash
     import { PUBLIC_NOTION_DATABASE_ID, PUBLIC_NOTION_TOKEN } from "$env/static/public";
-    import { initNotion } from "sveltekit-notion-blog";
+    import { initNotionBlog } from "sveltekit-notion-blog";
 
     export const prerender = true;
 
