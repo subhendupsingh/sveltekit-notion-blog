@@ -28,9 +28,15 @@ This is a plug and play library for [`Sveltekit`](https://kit.svelte.dev/) proje
 
     export const prerender = true;
 
-    initNotion({
-        databaseId: PUBLIC_NOTION_DATABASE_ID, //from .env
-        notionToken: PUBLIC_NOTION_TOKEN, //from .env
+    initNotionBlog({
+        tokens: {
+            databaseId: PUBLIC_NOTION_DATABASE_ID, //from .env
+            notionToken: PUBLIC_NOTION_TOKEN, //from .env
+        },
+        settings: {
+            blogTitle: "Notion Blog",
+            blogDescription: "A blog powered by Notion"
+        }
     });
 ```
 
