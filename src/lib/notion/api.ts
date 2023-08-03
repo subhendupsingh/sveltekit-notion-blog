@@ -1,6 +1,6 @@
 import type { BlogClient } from "$lib";
 import type { FAQ } from "$lib/types";
-import { Client, APIErrorCode, isNotionClientError, ClientErrorCode, isFullPage, isFullBlock } from "@notionhq/client";
+import { APIErrorCode, isNotionClientError, ClientErrorCode, isFullPage, isFullBlock } from "@notionhq/client";
 import type { BlockObjectResponse, PageObjectResponse, UserObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { ok, err, Result } from 'neverthrow';
 

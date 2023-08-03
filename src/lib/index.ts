@@ -5,20 +5,22 @@ import BlogPost from "$lib/components/BlogPost.svelte";
 import PostsList from "$lib/components/PostsList.svelte";
 
 type Tokens = { notionToken: string, databaseId: string, vercelByPassToken?: string };
-export type BlogClient = {client: Client, config: Tokens};
+type BlogSettings = { blogTitle: string, blogDescription: string };
+type InitConfig = { tokens: Tokens, settings: BlogSettings };
+export type BlogClient = { client: Client, config: Tokens, settings: BlogSettings };
 
 let notionCLient: BlogClient;
 
-export const initNotion = ( config: Tokens ): BlogClient | null => {
-        if(config?.notionToken && config?.notionToken){
-            const client = new Client({
-                auth: config.notionToken,
-            });
-            notionCLient = { client, config};
-            return notionCLient;
-        }else{
-            return null;
-        }
+export const initNotionBlog = ( config: InitConfig ): BlogClient | null => {
+    if(config?.tokens?.notionToken && config?.tokens?.notionToken){
+        const client = new Client({
+            auth: config.tokens.notionToken,
+        });
+        notionCLient = { client, config: config.tokens, settings: config.settings };
+        return notionCLient;
+    }else{
+        return null;
+    }
 }
 
 export const getAllPosts = async () => {
@@ -38,7 +40,8 @@ export const getAllPosts = async () => {
         if(res.isOk()){
             if(res.value?.length > 0){
                 return {
-                    pages: res.value
+                    pages: res.value,
+                    settings: notionCLient.settings
                 }
             }else{
                 return {
