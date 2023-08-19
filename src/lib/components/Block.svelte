@@ -7,8 +7,7 @@
 	import BulletList from "./BulletList.svelte";
 	import Embed from "./Embed.svelte";
     export let block: BlockObjectResponse;
-    //$: console.log(block.type, block);
-    
+    //$: console.log("type",block.type);
 </script>
 
 
