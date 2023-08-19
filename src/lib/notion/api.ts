@@ -96,6 +96,7 @@ export const getBlocks = async (blogClient: BlogClient,  blockId: string): Promi
             if(!isFullBlock(block)) continue;
             blocks.push(block);
         }
+        
         return ok(blocks);
     }else if(results && results.length == 0){
         return ok([]);
@@ -153,7 +154,7 @@ export const getFAQs = async (blogClent: BlogClient, id: string): Promise<Result
             if(row.type=="table_row"){
                 return {
                     question: row.table_row.cells?.[0]?.[0]?.plain_text,
-                    answer: row.table_row.cells?.[1]?.[0]?.plain_text
+                    answer: row.table_row.cells?.[1]?.map((r)=> r.plain_text)?.join("")
                 }
             }else{
                 return {

@@ -3,8 +3,10 @@
     export let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
 </script>
 
+<h3>Table of Contents</h3>
+
 {#if tableOfContent && tableOfContent?.length > 0}
-    <ul class="not-prose bg-slate-100 rounded-md w-full py-6 list-none">
+    <ul>
         {#each  tableOfContent as content }
             {#if content}
                 {#if content.type == "heading_2"}
@@ -20,5 +22,15 @@
 <style>
     a {
         @apply text-slate-700;
+    }
+
+    ul {
+        background-color: rgb(248 250 252 / 1);
+        list-style-type: none;
+        padding: 4px;
+        border-radius: 0.375rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        padding-left: 1.5rem;
     }
 </style>
