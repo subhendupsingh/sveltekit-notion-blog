@@ -3,12 +3,10 @@ const config = {
 
 	theme: {
 		extend: {
-			
 		}
 	},
 
 	plugins: [
-		require('@tailwindcss/typography'),
 	]
 };
 
