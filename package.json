@@ -60,9 +60,9 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource-variable/inter": "^5.0.19",
-		"@fontsource-variable/public-sans": "^5.0.19",
 		"@notionhq/client": "^2.2.4",
 		"@unpic/svelte": "^0.0.17",
+		"mode-watcher": "^0.3.1",
 		"neverthrow": "^6.0.0",
 		"svelte-meta-tags": "^2.8.0",
 		"sveltekit-embed": "^0.0.12"

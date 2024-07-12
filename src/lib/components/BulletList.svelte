@@ -5,7 +5,9 @@
 </script>
 
 {#if block && block.bulleted_list_item?.rich_text.length > 0}
-    {#each  block.bulleted_list_item.rich_text as item }
-        <Text text={item} />
-    {/each}
+    <ul class="list-disc list-inside">    
+        {#each  block.bulleted_list_item.rich_text as item }
+            <li class="list-item sk-blog-body lg:indent-4">{item.plain_text}</li>    
+        {/each}
+    </ul>
 {/if}

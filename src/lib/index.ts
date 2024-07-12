@@ -3,6 +3,7 @@ import { getBlocks, getDatabaseById, getFAQs, getPageBySlug } from "./notion/api
 import type { ServerLoadEvent } from "@sveltejs/kit";
 import BlogPost from "$lib/components/BlogPost.svelte";
 import PostsList from "$lib/components/PostsList.svelte";
+import '@fontsource-variable/inter';
 
 type Tokens = { notionToken: string, databaseId: string, vercelByPassToken?: string };
 type BlogSettings = { blogTitle: string, blogDescription: string };

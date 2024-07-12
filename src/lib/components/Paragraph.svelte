@@ -7,5 +7,13 @@
 </script>
 
 {#if paraText}
-    <p>{@html paraText}</p>
+    <p class="sk-blog-body">{@html paraText}</p>
 {/if}
+
+<style lang="postcss">
+    :global(.sk-blog-body) {
+        @apply font-inter text-lg font-normal tracking-wide text-gray-600 dark:text-gray-200;
+        @apply pt-4;
+        line-height: 2.2rem !important;
+    }
+</style>

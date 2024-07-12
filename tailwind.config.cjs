@@ -3,7 +3,10 @@ const config = {
 
 	theme: {
 		extend: {
-		}
+			fontFamily: {
+				inter: ['Inter', 'sans-serif']
+			}
+		},
 	},
 
 	plugins: [

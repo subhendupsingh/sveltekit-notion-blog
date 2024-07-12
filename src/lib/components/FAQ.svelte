@@ -45,7 +45,7 @@
 {#if faqs && count > 0}
     {#if loading} Loading...{/if}
     {#each faqs as faq}
-        <h3>{faq.question}</h3>
-        <p>{faq.answer}</p>
+        <h3 class="sk-blog-h3">{faq.question}</h3>
+        <p class="sk-blog-body">{faq.answer}</p>
     {/each}
 {/if}

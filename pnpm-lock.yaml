@@ -8,15 +8,15 @@ dependencies:
   '@fontsource-variable/inter':
     specifier: ^5.0.19
     version: 5.0.19
-  '@fontsource-variable/public-sans':
-    specifier: ^5.0.19
-    version: 5.0.19
   '@notionhq/client':
     specifier: ^2.2.4
     version: 2.2.15
   '@unpic/svelte':
     specifier: ^0.0.17
     version: 0.0.17(svelte@4.2.18)
+  mode-watcher:
+    specifier: ^0.3.1
+    version: 0.3.1(svelte@4.2.18)
   neverthrow:
     specifier: ^6.0.0
     version: 6.2.2
@@ -766,10 +766,6 @@ packages:
 
   /@fontsource-variable/inter@5.0.19:
     resolution: {integrity: sha512-V5KPpF5o0sI1uNWAdFArC87NDOb/ZJDPXLomEiKmDCYMlDUCTn2flkuAZkyME2rtGOKO7vzCuDJAND0m/5PhDA==}
-    dev: false
-
-  /@fontsource-variable/public-sans@5.0.19:
-    resolution: {integrity: sha512-Tc1V139visg0xUgSe2vQy86OwHEGb0dO57vcrD6Cw2vDRf42sZ4fD7nTuY0Q0AjVNemT7RicmkR9qnB/MfJ6ug==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
@@ -2668,6 +2664,14 @@ packages:
       pathe: 1.1.2
       pkg-types: 1.1.3
       ufo: 1.5.3
+    dev: false
+
+  /mode-watcher@0.3.1(svelte@4.2.18):
+    resolution: {integrity: sha512-inghSVSXpEENV0SHM98+AvjDmTOjh9EJIrJXMScK42GNkDm5QJL7a/nZQ8M8i8RK7loFHqsQKBKdlXfw5e5C4w==}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.1
+    dependencies:
+      svelte: 4.2.18
     dev: false
 
   /mri@1.2.0:
