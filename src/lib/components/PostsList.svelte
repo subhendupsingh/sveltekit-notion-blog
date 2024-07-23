@@ -5,8 +5,9 @@
     export let data: PageData;
 </script>
 
+<!-- Post List -->
 {#if data.pages}
-    <div class="min-h-screen bg-white py-8 flex flex-col gap-20 relative overflow-hidden lg:py-8">
+    <div class="min-h-screen bg-white dark:bg-gray-950 py-8 flex flex-col gap-20 relative overflow-hidden lg:py-8">
         <div class="relative w-full px-6 py-12 md:max-w-3xl md:mx-auto lg:max-w-4xl lg:pt-12 lg:pb-28">
             <div class="flex flex-col gap-6 mb-8">
                 <h1 class="font-bold text-4xl">{ data.settings.blogTitle }</h1>
