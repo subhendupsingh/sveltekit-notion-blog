@@ -82,5 +82,8 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/subhendupsingh/sveltekit-notion-blog"
+	},
+	"engines": {
+		"node":">=18.13"
 	}
 }
