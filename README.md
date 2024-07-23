@@ -42,6 +42,20 @@ This is a plug and play library for [`Sveltekit`](https://kit.svelte.dev/) proje
 
 ### Code Setup
 
+Add this to your `vite.config.ts`
+```bash
+    import { sveltekit } from '@sveltejs/kit/vite';
+    import { defineConfig } from 'vite';
+    
+    export default defineConfig({
+    	plugins: [sveltekit()],
+    	ssr: {
+    		noExternal: ['@fontsource-variable/inter']
+    	}
+    });
+
+```
+
 1. Install the package
 
 ```bash
