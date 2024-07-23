@@ -1,6 +1,6 @@
 {
 	"name": "sveltekit-notion-blog",
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -84,6 +84,6 @@
 		"url": "https://github.com/subhendupsingh/sveltekit-notion-blog"
 	},
 	"engines": {
-		"node":">=18.13"
+		"node": ">=18.13"
 	}
 }
