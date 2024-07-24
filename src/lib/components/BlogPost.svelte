@@ -89,7 +89,7 @@
 
 <ErrorPage {data} />
 
-<div class="min-h-screen bg-white dark:bg-gray-950 py-8 flex flex-col justify-center relative overflow-hidden lg:py-12">
+<div class="min-h-screen py-8 flex flex-col justify-center relative overflow-hidden lg:py-12">
     <div class="relative w-full px-6 py-12 md:max-w-3xl md:mx-auto lg:max-w-4xl lg:pt-16 lg:pb-28">
         <Post blocks={data.blocks} {tableOfContent} title={data.title} cover={data.cover} faqs={data.faqs} author={data.author} published={data.published} />
     </div>
