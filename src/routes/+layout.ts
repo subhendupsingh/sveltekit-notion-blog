@@ -9,7 +9,13 @@ initNotionBlog({
 		notionToken: PUBLIC_NOTION_TOKEN,
 	},
 	settings: {
-		blogTitle: "Notion Blog",
-		blogDescription: "A blog powered by Notion"
+	},
+	seo: {
+		logo: "https://res.cloudinary.com/curead/image/upload/v1669054676/Shootmail/logos/shootm-logo-with-name-dark-mode_rziumz.png",
+		siteName: "Shootmail",
+		siteUrl: "https://shootmail.app",
+		siteSlogan: "The best email marketing solution",
+		twitterHandle: "@subhendupsingh",
+		ogImage: "https://res.cloudinary.com/curead/image/upload/v1669054676/Shootmail/logos/shootm-logo-with-name-dark-mode_rziumz.png"
 	}
 });

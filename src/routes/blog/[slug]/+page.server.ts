@@ -8,5 +8,3 @@ export const config = {
 };
 
 export const load = (event: ServerLoadEvent) => getBlogPageBySlug(event);
-
-   

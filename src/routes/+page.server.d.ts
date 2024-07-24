@@ -11,11 +11,20 @@ export declare const load: () => Promise<{
     };
     pages?: undefined;
     settings?: undefined;
+    seo?: undefined;
 } | {
     pages: import("@notionhq/client/build/src/api-endpoints").PageObjectResponse[];
     settings: {
-        blogTitle: string;
-        blogDescription: string;
+        blogTitle?: string;
+        blogDescription?: string;
+    };
+    seo: {
+        siteUrl: string;
+        siteName: string;
+        siteSlogan?: string;
+        twitterHandle?: string;
+        logo: string;
+        ogImage: string;
     };
     error?: undefined;
 } | undefined>;

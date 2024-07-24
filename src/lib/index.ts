@@ -4,11 +4,13 @@ import type { ServerLoadEvent } from "@sveltejs/kit";
 import BlogPost from "$lib/components/BlogPost.svelte";
 import PostsList from "$lib/components/PostsList.svelte";
 import '@fontsource-variable/inter';
+import "./index.css";
 
 type Tokens = { notionToken: string, databaseId: string, vercelByPassToken?: string };
-type BlogSettings = { blogTitle: string, blogDescription: string };
-type InitConfig = { tokens: Tokens, settings: BlogSettings };
-export type BlogClient = { client: Client, config: Tokens, settings: BlogSettings };
+type BlogSettings = { blogTitle?: string, blogDescription?: string };
+type BlogSEO = { siteUrl: string, siteName: string, siteSlogan?: string, twitterHandle?: string, logo: string, ogImage: string };
+type InitConfig = { tokens: Tokens, settings: BlogSettings, seo: BlogSEO };
+export type BlogClient = { client: Client, config: Tokens, settings: BlogSettings, seo: BlogSEO };
 
 let notionCLient: BlogClient;
 
@@ -17,7 +19,7 @@ export const initNotionBlog = ( config: InitConfig ): BlogClient | null => {
         const client = new Client({
             auth: config.tokens.notionToken,
         });
-        notionCLient = { client, config: config.tokens, settings: config.settings };
+        notionCLient = { client, config: config.tokens, settings: config.settings, seo: config.seo };
         return notionCLient;
     }else{
         return null;
@@ -42,7 +44,8 @@ export const getAllPosts = async () => {
             if(res.value?.length > 0){
                 return {
                     pages: res.value,
-                    settings: notionCLient.settings
+                    settings: notionCLient.settings,
+                    seo: notionCLient.seo
                 }
             }else{
                 return {
@@ -137,7 +140,9 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
                 slug,
                 published,
                 author,
-                faqs
+                faqs,
+                settings: notionCLient.settings,
+                seo: notionCLient.seo
             }
         }
 

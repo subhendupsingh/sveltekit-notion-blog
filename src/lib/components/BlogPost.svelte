@@ -6,7 +6,6 @@
 	import type { PageData } from "../../routes/blog/[slug]/$types";
 
     export let data: PageData;
-
     let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
 
     $: tableOfContent = data?.blocks?.map((block)=>{
@@ -36,20 +35,20 @@
 
 <MetaTags
   title= {data.title}
-  titleTemplate="%s | StoreBud- Launch ecommerce website in india and the world"
+  titleTemplate={"%s | " + data.seo?.siteSlogan}
   description= {data.description}
   openGraph={{
-    url: "https://mystorebud.com/blog/" + data.slug,
+    url: (data?.seo?.siteUrl ?? "https://example.com") + "/blog/" +data.slug,
     title:data.title,
     description: data.description,
     images: [
       { url: data.cover ?? "" }
     ],
-    site_name: 'StoreBud'
+    site_name: data.seo?.siteName ?? ""
   }}
   twitter={{
-    handle: '@mystorebud',
-    site: '@mystorebud',
+    handle: data.seo?.twitterHandle ?? '@subhendupsingh',
+    site: data?.seo?.siteUrl ?? "https://example.com",
     cardType: 'summary_large_image',
     title: data.title,
     description: data.description,
@@ -70,16 +69,16 @@
         "author": data.author?.name ?? "Team StoreBud", 
         "publisher": {
             "@type": "Organization",
-            "name": "StoreBud",
+            "name": data.seo?.siteName ?? "",
             "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.mystorebud.com/android-chrome-192x192.png"
+                "@type": "ImageObject",
+                "url": data?.seo?.logo ?? "https://example.com/logo.png"
             }
         },
-        "url": "http://www.mystorebud.com",
+        "url": data?.seo?.siteUrl ?? "https://example.com",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https://mystorebud.com/blog"
+            "@id": data?.seo?.siteUrl+"/blog" ?? "https://example.com/blog"
         },
         "description": data.description,
         "articleBody": data.description,

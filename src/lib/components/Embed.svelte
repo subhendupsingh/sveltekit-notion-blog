@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { EmbedBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
     export let block:  EmbedBlockObjectResponse;
-    import { GenericEmbed } from 'sveltekit-embed'
 
    // $: if(block?.embed?.url) {fetchEmbedMetas(block?.embed?.url);}
 
@@ -47,7 +46,7 @@
         <img src={block.embed.url} alt={block.embed.caption?.join(" ")} />
     {:else}
         <a href={block.embed.url} target="_blank">
-            <GenericEmbed src={block.embed.url} />
+            <!-- <GenericEmbed src={block.embed.url} /> -->
         </a>
     {/if}
 {/if}

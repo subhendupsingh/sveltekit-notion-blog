@@ -1,0 +1,16 @@
+.sk-blog-body {
+    @apply font-inter text-lg font-normal tracking-wide text-gray-600 dark:text-gray-200;
+    line-height: 2.2rem !important;
+}
+
+.sk-blog-h1 {
+    @apply font-inter text-4xl font-extrabold leading-normal dark:text-gray-300;
+}
+
+.sk-blog-h2 {
+    @apply font-inter text-2xl font-bold leading-normal pt-8 dark:text-gray-300;
+}
+
+.sk-blog-h3 {
+    @apply font-inter text-xl font-bold leading-normal pt-8 dark:text-gray-300;
+}
