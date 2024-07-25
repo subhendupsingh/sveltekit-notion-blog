@@ -20,7 +20,7 @@ export const getDatabaseById = async (blogClient: BlogClient): Promise<Result<(P
                 property: "Published",
                 checkbox: {
                     "equals": true
-                }
+                },
             }
         });
 
@@ -32,6 +32,49 @@ export const getDatabaseById = async (blogClient: BlogClient): Promise<Result<(P
         }else{
             return ok([]);
         }
+    } catch (error) {
+        return handleNotionError(error);
+    }
+}
+
+export const getBlogSlugs = async (blogClient: BlogClient): Promise<Result<string[], ErrorResult>> => {
+    try {
+        const notion = blogClient.client;
+
+        if(!notion){
+            return err({code: 400, message: "Invalid or missing notion secret"});
+        }
+
+        const database = await notion.databases.query({
+            database_id: blogClient.config.databaseId,
+            filter: {
+                and: [
+                    {
+                        property: "Slug",
+                        rich_text: {
+                            is_not_empty: true
+                        }
+                    },
+                    {
+                        property: "Published",
+                        checkbox: {
+                            "equals": true
+                        },
+                    }
+                ]
+            },
+            filter_properties: ["KxP%5C"]
+        });
+
+        const results = database.results;
+
+        if(isPageObjectResponse(results) && results?.length > 0){
+            const result : PageObjectResponse[] = results;
+            const slugs = result.map((page) => page.properties["Slug"].rich_text[0].plain_text);
+            return ok(slugs);
+        }
+
+       return ok([]);
     } catch (error) {
         return handleNotionError(error);
     }

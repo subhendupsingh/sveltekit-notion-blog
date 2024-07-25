@@ -1,5 +1,5 @@
 import { Client, isFullUser } from "@notionhq/client";
-import { getBlocks, getDatabaseById, getFAQs, getPageBySlug } from "./notion/api";
+import { getBlocks, getBlogSlugs, getDatabaseById, getFAQs, getPageBySlug } from "./notion/api";
 import type { ServerLoadEvent } from "@sveltejs/kit";
 import BlogPost from "$lib/components/BlogPost.svelte";
 import PostsList from "$lib/components/PostsList.svelte";
@@ -163,6 +163,35 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
         }
     }
     
+    if(response.isErr()){
+        return {
+            error: {
+                code: response.error.code,
+                message: response.error.message
+            }
+        }
+    }
+}
+
+export const getAllBlogSlugs = async () => {
+
+    if(!notionCLient){
+        return {
+            error: {
+                code: 400,
+                message: "Notion client is not initialized"
+            }
+        }
+    }
+
+    const response = await getBlogSlugs(notionCLient);
+
+    if(response.isOk()){
+        return {
+            slugs: response.value
+        }
+    }
+
     if(response.isErr()){
         return {
             error: {
