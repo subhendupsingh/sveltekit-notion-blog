@@ -1,6 +1,6 @@
 {
 	"name": "sveltekit-notion-blog",
-	"version": "0.1.13",
+	"version": "0.1.14",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
