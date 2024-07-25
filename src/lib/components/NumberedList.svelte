@@ -5,7 +5,15 @@
 </script>
 
 {#if block && block.numbered_list_item.rich_text?.length> 0}
-    {#each  block.numbered_list_item.rich_text as item }
-        <Text text={item} />
-    {/each}
+    <ul class="list-inside py-2">
+        <li class="list-item">
+            {#if block.numbered_list_item.rich_text[0]}
+                <Text text={block.numbered_list_item.rich_text[0]} />
+            {/if}
+
+            {#if block.numbered_list_item.rich_text[1]}
+                <Text text={block.numbered_list_item.rich_text[1]} />
+            {/if}
+        </li>
+    </ul>
 {/if}

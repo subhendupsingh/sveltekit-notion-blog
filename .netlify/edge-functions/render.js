@@ -2825,7 +2825,7 @@ var init_index2 = __esm({
         const client = new import_client.Client({
           auth: config.tokens.notionToken
         });
-        notionCLient = { client, config: config.tokens, settings: config.settings };
+        notionCLient = { client, config: config.tokens, settings: config.settings, seo: config.seo };
         return notionCLient;
       } else {
         return null;
@@ -2851,9 +2851,14 @@ var init_layout_ts = __esm({
         databaseId: PUBLIC_NOTION_DATABASE_ID,
         notionToken: PUBLIC_NOTION_TOKEN
       },
-      settings: {
-        blogTitle: "Notion Blog",
-        blogDescription: "A blog powered by Notion"
+      settings: {},
+      seo: {
+        logo: "https://res.cloudinary.com/curead/image/upload/v1669054676/Shootmail/logos/shootm-logo-with-name-dark-mode_rziumz.png",
+        siteName: "Shootmail",
+        siteUrl: "https://shootmail.app",
+        siteSlogan: "The best email marketing solution",
+        twitterHandle: "@subhendupsingh",
+        ogImage: "https://res.cloudinary.com/curead/image/upload/v1669054676/Shootmail/logos/shootm-logo-with-name-dark-mode_rziumz.png"
       }
     });
   }
@@ -3073,8 +3078,8 @@ var init__ = __esm({
     index = 0;
     component = async () => component_cache ?? (component_cache = (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default);
     universal_id = "src/routes/+layout.ts";
-    imports = ["_app/immutable/nodes/0.B--WyJ1T.js", "_app/immutable/chunks/index.CkQxRDbV.js", "_app/immutable/chunks/scheduler.BHOD4Cgl.js", "_app/immutable/chunks/index.D97tauW2.js"];
-    stylesheets = ["_app/immutable/assets/0.B8g96hSV.css", "_app/immutable/assets/TableOfContent.xWyD1n9w.css"];
+    imports = ["_app/immutable/nodes/0.sCfNXAsK.js", "_app/immutable/chunks/index.D6A5iRL7.js", "_app/immutable/chunks/scheduler.CMZxjC0y.js", "_app/immutable/chunks/index.NaPW6Vk4.js"];
+    stylesheets = ["_app/immutable/assets/0.Dvt6WXQ6.css", "_app/immutable/assets/TableOfContent.xWyD1n9w.css"];
     fonts = ["_app/immutable/assets/inter-cyrillic-ext-wght-normal.DIEz8p5i.woff2", "_app/immutable/assets/inter-cyrillic-wght-normal.BmJJXa8e.woff2", "_app/immutable/assets/inter-greek-ext-wght-normal.D5AYLNiq.woff2", "_app/immutable/assets/inter-greek-wght-normal.DyIDNIyN.woff2", "_app/immutable/assets/inter-vietnamese-wght-normal._GQuwPVU.woff2", "_app/immutable/assets/inter-latin-ext-wght-normal.CN1pIXkb.woff2", "_app/immutable/assets/inter-latin-wght-normal.BgVq2Tq4.woff2"];
   }
 });
@@ -3144,7 +3149,7 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => component_cache2 ?? (component_cache2 = (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default);
-    imports2 = ["_app/immutable/nodes/1.b35OmQSa.js", "_app/immutable/chunks/scheduler.BHOD4Cgl.js", "_app/immutable/chunks/index.CkQxRDbV.js", "_app/immutable/chunks/entry.DrnyVjzz.js", "_app/immutable/chunks/index.D97tauW2.js"];
+    imports2 = ["_app/immutable/nodes/1.Y3GPzMMi.js", "_app/immutable/chunks/scheduler.CMZxjC0y.js", "_app/immutable/chunks/index.D6A5iRL7.js", "_app/immutable/chunks/entry.D1TzbtWv.js", "_app/immutable/chunks/index.NaPW6Vk4.js"];
     stylesheets2 = [];
     fonts2 = [];
   }
@@ -3335,7 +3340,7 @@ var options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "fqfgou"
+  version_hash: "e733iq"
 };
 async function get_hooks() {
   return {};
@@ -6317,7 +6322,7 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "notion-add-connection.png", "notion-database-id.png", "sveltekit-notion-blog-preview-1.png", "sveltekit-notion-blog-preview-2.png"]),
     mimeTypes: { ".png": "image/png" },
     _: {
-      client: { "start": "_app/immutable/entry/start.CeEy1n28.js", "app": "_app/immutable/entry/app.cwqIXl3L.js", "imports": ["_app/immutable/entry/start.CeEy1n28.js", "_app/immutable/chunks/entry.DrnyVjzz.js", "_app/immutable/chunks/scheduler.BHOD4Cgl.js", "_app/immutable/chunks/index.D97tauW2.js", "_app/immutable/entry/app.cwqIXl3L.js", "_app/immutable/chunks/scheduler.BHOD4Cgl.js", "_app/immutable/chunks/index.CkQxRDbV.js"], "stylesheets": [], "fonts": [], "uses_env_dynamic_public": false },
+      client: { "start": "_app/immutable/entry/start.Bef_DeA7.js", "app": "_app/immutable/entry/app.CNUjI5aQ.js", "imports": ["_app/immutable/entry/start.Bef_DeA7.js", "_app/immutable/chunks/entry.D1TzbtWv.js", "_app/immutable/chunks/scheduler.CMZxjC0y.js", "_app/immutable/chunks/index.NaPW6Vk4.js", "_app/immutable/entry/app.CNUjI5aQ.js", "_app/immutable/chunks/scheduler.CMZxjC0y.js", "_app/immutable/chunks/index.D6A5iRL7.js"], "stylesheets": [], "fonts": [], "uses_env_dynamic_public": false },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
         __memo(() => Promise.resolve().then(() => (init__2(), __exports2)))
@@ -6330,7 +6335,7 @@ var manifest = (() => {
     }
   };
 })();
-var prerendered = /* @__PURE__ */ new Set(["/", "/__data.json", "/blog/first-post", "/blog/first-post/__data.json", "/blog/the-rise-of-d2c-brands-what-you-need-to-know", "/blog/the-rise-of-d2c-brands-what-you-need-to-know/__data.json"]);
+var prerendered = /* @__PURE__ */ new Set(["/", "/__data.json", "/blog/how-shootmail-handles-security", "/blog/how-shootmail-handles-security/__data.json"]);
 
 // .svelte-kit/netlify-tmp/entry.js
 var server = new Server(manifest);

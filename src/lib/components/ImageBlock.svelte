@@ -6,12 +6,12 @@
 
 {#if block.image}
     {#if block.image.type=="file"}
-        <Image src={block.image.file.url} layout="fullWidth" aspectRatio={16/9} class="aspect-video object-cover rounded-xl my-8" />
+        <Image src={block.image.file.url} layout="fullWidth" aspectRatio={16/9} class="aspect-auto object-contain rounded-xl mt-4" />
         {#if block.image.caption?.length > 0}
             <p class="w-full text-xs text-gray-400 text-center">{block.image.caption?.[0].plain_text}</p>
         {/if}
     {:else if block.image.type=="external"}
-        <Image src={block.image.external.url} layout="fullWidth" aspectRatio={16/9} class="aspect-video object-cover rounded-xl my-8" />
+        <Image src={block.image.external.url} layout="fullWidth" aspectRatio={16/9} class="aspect-auto object-contain rounded-xl mt-4" />
         {#if block.image.caption?.length > 0}
             <p class="w-full text-xs text-gray-400 text-center">{block.image.caption?.[0].plain_text}</p>
         {/if}

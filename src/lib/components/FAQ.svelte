@@ -5,7 +5,7 @@
 
     export let faqs: FAQ[] = [];
     $: count = faqs.length;
-    $: (faqs?.shift());
+    /* $: (faqs?.shift()); */
     let loading = false;
     
     /* onMount(async()=>{
@@ -45,7 +45,9 @@
 {#if faqs && count > 0}
     {#if loading} Loading...{/if}
     {#each faqs as faq}
-        <h3 class="sk-blog-h3">{faq.question}</h3>
-        <p class="sk-blog-body">{faq.answer}</p>
+        {#if (faq.question && faq.answer)}
+            <h3 class="sk-blog-h3">{faq.question}</h3>
+            <p class="sk-blog-body">{faq.answer}</p>
+        {/if}
     {/each}
 {/if}

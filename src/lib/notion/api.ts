@@ -150,11 +150,19 @@ export const getFAQs = async (blogClent: BlogClient, id: string): Promise<Result
     const response = await getBlocks(blogClent, id);
 
     if(response.isOk()){
+        
         const faqs: FAQ[] = response.value.map((row)=>{
             if(row.type=="table_row"){
-                return {
-                    question: row.table_row.cells?.[0]?.[0]?.plain_text,
-                    answer: row.table_row.cells?.[1]?.map((r)=> r.plain_text)?.join("")
+                if(row.table_row.cells?.[0]?.[0]?.plain_text == "Question"){
+                    return {
+                        question: null,
+                        answer: null
+                    }
+                }else{
+                    return {
+                        question: row.table_row.cells?.[0]?.[0]?.plain_text,
+                        answer: row.table_row.cells?.[1]?.map((r)=> r.plain_text)?.join("")
+                    }
                 }
             }else{
                 return {

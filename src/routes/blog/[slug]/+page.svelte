@@ -5,4 +5,3 @@
 
 <BlogPost {data} />
 
-

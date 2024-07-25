@@ -41,12 +41,12 @@
             {/if}
 
             <TableOfContent {tableOfContent} />
-            
             {#each blocks as block}
                 <Block {block} />
             {/each}
 
             {#if faqs && faqs.length > 0}
+            <!-- {JSON.stringify(faqs)} -->
                 <Faq {faqs} />
             {/if}
         </article>

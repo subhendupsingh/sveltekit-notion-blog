@@ -1,6 +1,18 @@
 <script lang="ts">
 	import type { TableOfContentItems } from "$lib/types";
     export let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
+
+    //method to slugify
+    function slugify(text: string) {
+        return text
+            .toString()
+            .toLowerCase()
+            .replace(/\s+/g, '-')           // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+            .replace(/^-+/, '')             // Trim - from start of text
+            .replace(/-+$/, '');            // Trim - from end of text
+    }
 </script>
 
 <h3 class="sk-blog-h3">Table of Contents</h3>
@@ -10,9 +22,9 @@
         {#each  tableOfContent as content }
             {#if content}
                 {#if content.type == "heading_2"}
-                    <li class="text-base font-semibold my-2.5"><a class="no-underline hover:underline underline-offset-2" href={"#"+content.id}>{content.text}</a></li>
+                    <li class="text-base font-semibold my-2.5"><a class="no-underline hover:underline underline-offset-2" href={"#"+(slugify(content.text))}>{content.text}</a></li>
                 {:else if content.type == "heading_3"}
-                    <li class="indent-4 text-sm font-semibold my-1"><a class="no-underline hover:underline underline-offset-2" href={"#"+content.id}>{content.text}</a></li>
+                    <li class="indent-4 text-sm font-semibold my-1"><a class="no-underline hover:underline underline-offset-2" href={"#"+(slugify(content.text))}>{content.text}</a></li>
                 {/if}    
             {/if}
         {/each}
