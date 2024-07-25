@@ -12,8 +12,7 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"patch": "npm version patch",
-		"minor": "npm version minor",
-		"publish": "npm publish"
+		"minor": "npm version minor"
 	},
 	"exports": {
 		".": {
