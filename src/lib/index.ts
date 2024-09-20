@@ -1,5 +1,5 @@
 import { Client, isFullUser } from "@notionhq/client";
-import { getBlocks, getBlogSlugs, getDatabaseById, getFAQs, getPageBySlug } from "./notion/api";
+import { getBlocks, getBlogSlugs, getDatabaseById, getFAQs, getPageBySlug, groupNumberedListItems } from "./notion/api";
 import type { ServerLoadEvent } from "@sveltejs/kit";
 import BlogPost from "$lib/components/BlogPost.svelte";
 import PostsList from "$lib/components/PostsList.svelte";
@@ -119,8 +119,7 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
         const blockResponse = await getBlocks(notionCLient , page.id);
         
         if(blockResponse.isOk()){
-            //console.log("result", JSON.stringify(blockResponse.value));
-            const blocks = blockResponse.value;
+            const blocks = groupNumberedListItems(blockResponse.value);
             const faqsTableId =  blocks?.filter((f) => f.type=="table")?.[0]?.id;
             let faqs = null;
             

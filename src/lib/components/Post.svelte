@@ -5,8 +5,9 @@
 	import type { FAQ, TableOfContentItems } from "$lib/types";
 	import { Image } from "@unpic/svelte";
 	import Faq from "./FAQ.svelte";
+	import type { CustomBlockObjectResponse } from "../notion/api";
 
-    export let blocks: BlockObjectResponse[] | undefined;
+    export let blocks: CustomBlockObjectResponse[] | undefined;
     export let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
     export let title: string | undefined;
     export let cover: string | undefined;
@@ -41,6 +42,7 @@
             {/if}
 
             <TableOfContent {tableOfContent} />
+            
             {#each blocks as block}
                 <Block {block} />
             {/each}

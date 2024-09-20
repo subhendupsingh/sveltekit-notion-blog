@@ -3,10 +3,13 @@
 	import Heading from "./Heading.svelte";
 	import Paragraph from "./Paragraph.svelte";
 	import ImageBlock from "./ImageBlock.svelte";
-	import NumberedList from "./NumberedList.svelte";
+	import NumberedListGroup from "./NumberedListGroup.svelte";
 	import BulletList from "./BulletList.svelte";
 	import Embed from "./Embed.svelte";
-    export let block: BlockObjectResponse;
+	import type { CustomBlockObjectResponse } from "../notion/api";
+	import Code from "./Code.svelte";
+	import NumberedList from "./NumberedList.svelte";
+    export let block: CustomBlockObjectResponse;
 </script>
 
 
@@ -26,4 +29,8 @@
     <ImageBlock {block} />
 {:else if block.type=="embed"}
     <Embed {block} />
+{:else if block.type=="grouped_numbered_list"}
+    <NumberedListGroup {block} />
+{:else if block.type=="code"}
+    <Code {block} />
 {/if}

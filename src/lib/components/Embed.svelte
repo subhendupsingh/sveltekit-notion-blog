@@ -12,7 +12,7 @@
 
     const fetchEmbedMetas = async (url: string) => {
         isEmbedImage = isImage(url);
-        console.log("url", url, "isEmbedImage",isEmbedImage);
+       // console.log("url", url, "isEmbedImage",isEmbedImage);
         
         if(isEmbedImage){
             return url;
@@ -25,12 +25,12 @@
             }
         })
 
-        console.log("response", response);
+       // console.log("response", response);
         
         
         if(response.ok){
             const json = await response.json();
-            console.log(json);
+           // console.log(json);
             
             title =  json?.title;
             description = json?.description,
