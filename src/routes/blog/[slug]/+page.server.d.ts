@@ -15,7 +15,7 @@ export declare const load: (event: ServerLoadEvent) => Promise<{
     settings?: undefined;
     seo?: undefined;
 } | {
-    blocks: import("@notionhq/client/build/src/api-endpoints").BlockObjectResponse[];
+    blocks: import("../../../lib/notion/api").CustomBlockObjectResponse[];
     title: string | undefined;
     description: string | undefined;
     cover: string | undefined;

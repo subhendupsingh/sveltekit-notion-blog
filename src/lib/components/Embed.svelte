@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { EmbedBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+	import { onMount } from "svelte";
+	import GenericEmbed from "./GenericEmbed.svelte";
+	import ShootmailEmbed from "./ShootmailEmbed.svelte";
     export let block:  EmbedBlockObjectResponse;
-
-   // $: if(block?.embed?.url) {fetchEmbedMetas(block?.embed?.url);}
 
     const isImage = (url: string) => {
         return url.indexOf(".jpg") >=0 || url.indexOf(".png") >=0 || url.indexOf(".jpeg") >=0 || url.indexOf(".webp") >=0 || url.indexOf(".avif") >=0
@@ -12,25 +13,20 @@
 
     const fetchEmbedMetas = async (url: string) => {
         isEmbedImage = isImage(url);
-       // console.log("url", url, "isEmbedImage",isEmbedImage);
+        console.log("url", url, "isEmbedImage",isEmbedImage);
         
         if(isEmbedImage){
             return url;
         }
 
-        const response = await fetch(`https://api.dub.sh/metatags?url=${url}`, {
-            mode: "no-cors",
-            headers: {
-                "content-type": "application/json"
-            }
-        })
+        const response = await fetch(`https://api.dub.sh/metatags?url=${url}`)
 
-       // console.log("response", response);
+       console.log("response", response);
         
         
         if(response.ok){
             const json = await response.json();
-           // console.log(json);
+           console.log(json);
             
             title =  json?.title;
             description = json?.description,
@@ -39,14 +35,22 @@
             return url;
         }
     }
+
+    onMount(async () => {
+        if(block?.embed?.url) {
+            fetchEmbedMetas(block?.embed?.url);
+        }
+    })
 </script>
 
 {#if block}
     {#if isImage(block.embed.url)}
         <img src={block.embed.url} alt={block.embed.caption?.join(" ")} />
     {:else}
-        <a href={block.embed.url} target="_blank">
-            <!-- <GenericEmbed src={block.embed.url} /> -->
-        </a>
+        {#if block.embed.url.indexOf("shootmail.app")>-1}
+            <ShootmailEmbed props={{ url: block.embed.url, title, description, image }} />
+        {:else}
+            <GenericEmbed props={{ url: block.embed.url, title, description, image }} />
+        {/if}
     {/if}
 {/if}
