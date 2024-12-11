@@ -47,7 +47,6 @@
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
 		"publint": "^0.1.9",
-		"shiki": "^1.18.0",
 		"svelte": "^4.2.12",
 		"svelte-check": "^3.4.3",
 		"svelte-preprocess": "^5.0.3",
@@ -63,10 +62,10 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource-variable/inter": "^5.0.19",
-		"@notionhq/client": "^2.2.15",
 		"@unpic/svelte": "^0.0.17",
 		"mode-watcher": "^0.3.1",
 		"neverthrow": "^6.0.0",
+		"shiki": "^1.24.2",
 		"svelte-meta-tags": "^2.8.0"
 	},
 	"homepage": "https://sveltekit-notion-blog.netlify.app/",

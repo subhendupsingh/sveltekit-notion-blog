@@ -13,7 +13,7 @@ export declare const load: () => Promise<{
     settings?: undefined;
     seo?: undefined;
 } | {
-    pages: import("@notionhq/client/build/src/api-endpoints").PageObjectResponse[];
+    pages: import("../lib/types").PageObjectResponse[];
     settings: {
         blogTitle?: string;
         blogDescription?: string;

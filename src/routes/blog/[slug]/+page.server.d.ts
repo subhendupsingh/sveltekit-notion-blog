@@ -21,7 +21,7 @@ export declare const load: (event: ServerLoadEvent) => Promise<{
     cover: string | undefined;
     slug: string;
     published: string | undefined;
-    author: import("@notionhq/client/build/src/api-endpoints").UserObjectResponse | undefined;
+    author: import("../../../lib/types").PersonUserObjectResponse | undefined;
     faqs: import("../../../lib/types").FAQ[] | null;
     settings: {
         blogTitle?: string;

@@ -1,35 +1,32 @@
-import { Client, isFullUser } from "@notionhq/client";
 import { getBlocks, getBlogSlugs, getDatabaseById, getFAQs, getPageBySlug, groupNumberedListItems } from "./notion/api";
 import type { ServerLoadEvent } from "@sveltejs/kit";
 import BlogPost from "$lib/components/BlogPost.svelte";
 import PostsList from "$lib/components/PostsList.svelte";
 import '@fontsource-variable/inter';
 import "./index.css";
+import { isFullUser } from "./types/helpers";
 
 type Tokens = { notionToken: string, databaseId: string, vercelByPassToken?: string };
 type BlogSettings = { blogTitle?: string, blogDescription?: string };
 type BlogSEO = { siteUrl: string, siteName: string, siteSlogan?: string, twitterHandle?: string, logo: string, ogImage: string };
 type InitConfig = { tokens: Tokens, settings: BlogSettings, seo: BlogSEO };
-export type BlogClient = { client: Client, config: Tokens, settings: BlogSettings, seo: BlogSEO };
+export type BlogClient = { config: Tokens, settings: BlogSettings, seo: BlogSEO };
 
 let notionCLient: BlogClient;
 
-export const initNotionBlog = ( config: InitConfig ): BlogClient | null => {
-    if(config?.tokens?.notionToken && config?.tokens?.notionToken){
-        const client = new Client({
-            auth: config.tokens.notionToken,
-        });
-        notionCLient = { client, config: config.tokens, settings: config.settings, seo: config.seo };
+export const initNotionBlog = (config: InitConfig): BlogClient | null => {
+    if (config?.tokens?.notionToken) {
+        notionCLient = { config: config.tokens, settings: config.settings, seo: config.seo };
         return notionCLient;
-    }else{
+    } else {
         return null;
     }
 }
 
 export const getAllPosts = async () => {
     try {
-        
-        if(!notionCLient){
+
+        if (!notionCLient) {
             return {
                 error: {
                     code: 400,
@@ -38,16 +35,16 @@ export const getAllPosts = async () => {
             }
         }
 
-        const res = await getDatabaseById(notionCLient); 
+        const res = await getDatabaseById(notionCLient);
 
-        if(res.isOk()){
-            if(res.value?.length > 0){
+        if (res.isOk()) {
+            if (res.value?.length > 0) {
                 return {
                     pages: res.value,
                     settings: notionCLient.settings,
                     seo: notionCLient.seo
                 }
-            }else{
+            } else {
                 return {
                     error: {
                         code: 400,
@@ -57,7 +54,7 @@ export const getAllPosts = async () => {
             }
         }
 
-        if(res.isErr()){
+        if (res.isErr()) {
             return {
                 error: {
                     code: res.error.code,
@@ -79,7 +76,7 @@ export const getAllPosts = async () => {
 export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
     const { slug } = event.params;
 
-    if(!notionCLient){
+    if (!notionCLient) {
         return {
             error: {
                 code: 400,
@@ -88,7 +85,7 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
         }
     }
 
-    if(!slug){
+    if (!slug) {
         return {
             error: {
                 code: 400,
@@ -96,18 +93,18 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
             }
         }
     }
-    
-    const response = await getPageBySlug(notionCLient , slug);
-    
-    if(response.isOk() && response.value?.length>0){
+
+    const response = await getPageBySlug(notionCLient, slug);
+
+    if (response.isOk() && response.value?.length > 0) {
         const page = response.value?.[0];
-        const title = page.properties["Title"].type=="title" && page.properties["Title"]?.title?.[0]?.type=="text" ? page.properties["Title"]?.title?.[0]?.text?.content : undefined;
-        const description = page.properties["Short Description"]?.type=="rich_text"? page.properties["Short Description"]?.rich_text?.[0]?.plain_text : undefined;
-        const cover = page?.cover?.type=="external" ? page?.cover?.external?.url : undefined;
-        const published = page.properties["Publish Date"]?.type == "date" ? page.properties["Publish Date"].date?.start: undefined;
-        const author = page.properties["Authors"]?.type=="people" && page.properties["Authors"]?.people?.[0] ? isFullUser(page.properties["Authors"]?.people?.[0])? page.properties["Authors"]?.people?.[0] : undefined: undefined;
-        
-        if(!page?.id){
+        const title = page.properties["Title"].type == "title" && page.properties["Title"]?.title?.[0]?.type == "text" ? page.properties["Title"]?.title?.[0]?.text?.content : undefined;
+        const description = page.properties["Short Description"]?.type == "rich_text" ? page.properties["Short Description"]?.rich_text?.[0]?.plain_text : undefined;
+        const cover = page?.cover?.type == "external" ? page?.cover?.external?.url : undefined;
+        const published = page.properties["Publish Date"]?.type == "date" ? page.properties["Publish Date"].date?.start : undefined;
+        const author = page.properties["Authors"]?.type == "people" && page.properties["Authors"]?.people?.[0] ? isFullUser(page.properties["Authors"]?.people?.[0]) ? page.properties["Authors"]?.people?.[0] : undefined : undefined;
+
+        if (!page?.id) {
             return {
                 error: {
                     code: 500,
@@ -116,17 +113,17 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
             }
         }
 
-        const blockResponse = await getBlocks(notionCLient , page.id);
-        
-        if(blockResponse.isOk()){
+        const blockResponse = await getBlocks(notionCLient, page.id);
+
+        if (blockResponse.isOk()) {
             const blocks = groupNumberedListItems(blockResponse.value);
-            const faqsTableId =  blocks?.filter((f) => f.type=="table")?.[0]?.id;
+            const faqsTableId = blocks?.filter((f) => f.type == "table")?.[0]?.id;
             let faqs = null;
-            
-            if(faqsTableId){
-                const faqsResponse =  await getFAQs(notionCLient , faqsTableId);
-                
-                if(faqsResponse.isOk()){
+
+            if (faqsTableId) {
+                const faqsResponse = await getFAQs(notionCLient, faqsTableId);
+
+                if (faqsResponse.isOk()) {
                     faqs = faqsResponse.value;
                 }
             }
@@ -145,7 +142,7 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
             }
         }
 
-        if(blockResponse.isErr()){
+        if (blockResponse.isErr()) {
             return {
                 error: {
                     code: blockResponse.error.code,
@@ -153,7 +150,7 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
                 }
             }
         }
-    }else{
+    } else {
         return {
             error: {
                 code: 500,
@@ -161,8 +158,8 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
             }
         }
     }
-    
-    if(response.isErr()){
+
+    if (response.isErr()) {
         return {
             error: {
                 code: response.error.code,
@@ -174,7 +171,7 @@ export const getBlogPageBySlug = async (event: ServerLoadEvent) => {
 
 export const getAllBlogSlugs = async () => {
 
-    if(!notionCLient){
+    if (!notionCLient) {
         return {
             error: {
                 code: 400,
@@ -185,13 +182,13 @@ export const getAllBlogSlugs = async () => {
 
     const response = await getBlogSlugs(notionCLient);
 
-    if(response.isOk()){
+    if (response.isOk()) {
         return {
             slugs: response.value
         }
     }
 
-    if(response.isErr()){
+    if (response.isErr()) {
         return {
             error: {
                 code: response.error.code,
