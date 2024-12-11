@@ -100,27 +100,6 @@ export const getBlogSlugs = async (blogClient: BlogClient): Promise<Result<strin
             return err({ code: 400, message: "Invalid or missing notion secret" });
         }
 
-        /* const database = await notion.databases.query({
-            database_id: blogClient.config.databaseId,
-            filter: {
-                and: [
-                    {
-                        property: "Slug",
-                        rich_text: {
-                            is_not_empty: true
-                        }
-                    },
-                    {
-                        property: "Published",
-                        checkbox: {
-                            "equals": true
-                        },
-                    }
-                ]
-            },
-            filter_properties: ["KxP%5C"]
-        }); */
-
         const database = await api.post<{ object: "list", results: PageObjectResponse[] }>(url, blogClient, {
             filter: {
                 and: [
@@ -137,9 +116,12 @@ export const getBlogSlugs = async (blogClient: BlogClient): Promise<Result<strin
                         },
                     }
                 ]
-            },
-            filter_properties: ["KxP%5C"]
+            }
         });
+
+        if(database.error) {
+            return err({ code: 500, message: database.error });
+        }
 
         const results = database.data?.results;
 
@@ -163,17 +145,6 @@ export const getPageBySlug = async (blogClient: BlogClient, slug: string): Promi
         if (!notion) {
             return err({ code: 400, message: "Invalid or missing notion secret" });
         }
-
-        /* const res = await notion.databases.query({
-            database_id: blogClient.config.databaseId,
-
-            filter: {
-                property: "Slug",
-                rich_text: {
-                    equals: slug
-                }
-            }
-        }); */
 
         const url = `${BASE_URL}/databases/${blogClient.config.databaseId}/query`;
         const res = await api.post<{ object: "list", results: PageObjectResponse[] }>(url, blogClient, {
@@ -211,11 +182,6 @@ export const getBlocks = async (blogClient: BlogClient, blockId: string): Promis
         return err({ code: 400, message: "Invalid or missing notion secret" });
     }
 
-    /* const { results, has_more, next_cursor, type } = await notion.blocks.children.list({
-        block_id: blockId,
-        page_size: 100,
-    }); */
-
     let blocks: BlockObjectResponse[] = [];
 
     const results = await getAllBlocksRecursively(blogClient, blockId, blocks, undefined);
@@ -241,7 +207,6 @@ const getAllBlocksRecursively = async (blogClient: BlogClient, blockId: string, 
         }
         const res = await api.get<ListBlockChildrenResponse>(url, blogClient);
         
-        //console.log("url", url, "blocks", blocks.length, "has_more", res.data?.has_more, "next_cursor", res.data?.next_cursor);
         if (res.error) {
             return err({ code: 500, message: res.error });
         }
@@ -259,8 +224,6 @@ const getAllBlocksRecursively = async (blogClient: BlogClient, blockId: string, 
             }
         }
 
-        //console.log("blocks", blocks.length, "has_more", has_more, "next_cursor", next_cursor);
-        //console.log("Final blocks length", blocks.length);
         return ok(blocks);
     } catch (error) {
         return handleNotionError(error);
