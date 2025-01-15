@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 	import Heading from "./Heading.svelte";
 	import Paragraph from "./Paragraph.svelte";
 	import ImageBlock from "./ImageBlock.svelte";

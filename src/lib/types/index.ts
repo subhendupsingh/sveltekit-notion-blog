@@ -19,6 +19,22 @@ export type PartialUserObjectResponse = { id: IdRequest; object: "user" }
 
 export type UserObjectResponse = PersonUserObjectResponse
 
+type LanguageRequest =
+  | "bash"
+  | "css"
+  | "html"
+  | "javascript"
+  | "json"
+  | "markup"
+  | "notion formula"
+  | "plain text"
+  | "powershell"
+  | "python"
+  | "toml"
+  | "typescript"
+  | "xml"
+  | "yaml"
+
 type SelectColor =
     | "default"
     | "gray"
@@ -286,7 +302,6 @@ export type BlockObjectResponse = NumberedListItemBlockObjectResponse
     | TableRowBlockObjectResponse
 
 
-
 export type ListBlockChildrenResponse = {
     type: "block"
     block: EmptyObject
@@ -294,4 +309,262 @@ export type ListBlockChildrenResponse = {
     next_cursor: string | null
     has_more: boolean
     results: Array<PartialBlockObjectResponse | BlockObjectResponse>
+}
+
+export type BulletedListItemBlockObjectResponse = {
+    type: "bulleted_list_item"
+    bulleted_list_item: {
+      rich_text: Array<RichTextItemResponse>
+      color: ApiColor
+    }
+    parent:
+      | { type: "database_id"; database_id: string }
+      | { type: "page_id"; page_id: string }
+      | { type: "block_id"; block_id: string }
+      | { type: "workspace"; workspace: true }
+    object: "block"
+    id: string
+    created_time: string
+    created_by: PartialUserObjectResponse
+    last_edited_time: string
+    last_edited_by: PartialUserObjectResponse
+    has_children: boolean
+    archived: boolean
+    in_trash: boolean
+  }
+  
+  export interface TableOfContentItems {
+    type: string,
+    text: string,
+    id: string
+}
+
+export type CodeBlockObjectResponse = {
+    type: "code"
+    code: {
+      rich_text: Array<RichTextItemResponse>
+      caption: Array<RichTextItemResponse>
+      language: LanguageRequest
+    }
+    parent:
+      | { type: "database_id"; database_id: string }
+      | { type: "page_id"; page_id: string }
+      | { type: "block_id"; block_id: string }
+      | { type: "workspace"; workspace: true }
+    object: "block"
+    id: string
+    created_time: string
+    created_by: PartialUserObjectResponse
+    last_edited_time: string
+    last_edited_by: PartialUserObjectResponse
+    has_children: boolean
+    archived: boolean
+    in_trash: boolean
+  }
+
+  export type EmbedBlockObjectResponse = {
+    type: "embed"
+    embed: { url: string; caption: Array<RichTextItemResponse> }
+    parent:
+      | { type: "database_id"; database_id: string }
+      | { type: "page_id"; page_id: string }
+      | { type: "block_id"; block_id: string }
+      | { type: "workspace"; workspace: true }
+    object: "block"
+    id: string
+    created_time: string
+    created_by: PartialUserObjectResponse
+    last_edited_time: string
+    last_edited_by: PartialUserObjectResponse
+    has_children: boolean
+    archived: boolean
+    in_trash: boolean
+  }
+
+  export type Heading1BlockObjectResponse = {
+    type: "heading_1"
+    heading_1: {
+      rich_text: Array<RichTextItemResponse>
+      color: ApiColor
+      is_toggleable: boolean
+    }
+    parent:
+      | { type: "database_id"; database_id: string }
+      | { type: "page_id"; page_id: string }
+      | { type: "block_id"; block_id: string }
+      | { type: "workspace"; workspace: true }
+    object: "block"
+    id: string
+    created_time: string
+    created_by: PartialUserObjectResponse
+    last_edited_time: string
+    last_edited_by: PartialUserObjectResponse
+    has_children: boolean
+    archived: boolean
+    in_trash: boolean
+  }
+  
+  export type Heading2BlockObjectResponse = {
+    type: "heading_2"
+    heading_2: {
+      rich_text: Array<RichTextItemResponse>
+      color: ApiColor
+      is_toggleable: boolean
+    }
+    parent:
+      | { type: "database_id"; database_id: string }
+      | { type: "page_id"; page_id: string }
+      | { type: "block_id"; block_id: string }
+      | { type: "workspace"; workspace: true }
+    object: "block"
+    id: string
+    created_time: string
+    created_by: PartialUserObjectResponse
+    last_edited_time: string
+    last_edited_by: PartialUserObjectResponse
+    has_children: boolean
+    archived: boolean
+    in_trash: boolean
+  }
+  
+  export type Heading3BlockObjectResponse = {
+    type: "heading_3"
+    heading_3: {
+      rich_text: Array<RichTextItemResponse>
+      color: ApiColor
+      is_toggleable: boolean
+    }
+    parent:
+      | { type: "database_id"; database_id: string }
+      | { type: "page_id"; page_id: string }
+      | { type: "block_id"; block_id: string }
+      | { type: "workspace"; workspace: true }
+    object: "block"
+    id: string
+    created_time: string
+    created_by: PartialUserObjectResponse
+    last_edited_time: string
+    last_edited_by: PartialUserObjectResponse
+    has_children: boolean
+    archived: boolean
+    in_trash: boolean
+  }
+
+  export type ImageBlockObjectResponse = {
+    type: "image"
+    image:
+      | {
+          type: "external"
+          external: { url: TextRequest }
+          caption: Array<RichTextItemResponse>
+        }
+      | {
+          type: "file"
+          file: { url: string; expiry_time: string }
+          caption: Array<RichTextItemResponse>
+        }
+    parent:
+      | { type: "database_id"; database_id: string }
+      | { type: "page_id"; page_id: string }
+      | { type: "block_id"; block_id: string }
+      | { type: "workspace"; workspace: true }
+    object: "block"
+    id: string
+    created_time: string
+    created_by: PartialUserObjectResponse
+    last_edited_time: string
+    last_edited_by: PartialUserObjectResponse
+    has_children: boolean
+    archived: boolean
+    in_trash: boolean
+  }
+
+  export type ParagraphBlockObjectResponse = {
+    type: "paragraph"
+    paragraph: { rich_text: Array<RichTextItemResponse>; color: ApiColor }
+    parent:
+      | { type: "database_id"; database_id: string }
+      | { type: "page_id"; page_id: string }
+      | { type: "block_id"; block_id: string }
+      | { type: "workspace"; workspace: true }
+    object: "block"
+    id: string
+    created_time: string
+    created_by: PartialUserObjectResponse
+    last_edited_time: string
+    last_edited_by: PartialUserObjectResponse
+    has_children: boolean
+    archived: boolean
+    in_trash: boolean
+  }
+
+  export interface Cover {
+    type:     string;
+    external: External;
+}
+
+export interface External {
+    url: string;
+}
+
+export interface Properties {
+    Authors:             Authors;
+    Categories:          Authors;
+    "Short Description": ShortDescription;
+    "Publish Date":      PublishDate;
+    Slug:                ShortDescription;
+    Published:           Published;
+    Title:               Title;
+}
+
+export interface Relation {
+    id: string;
+}
+
+export interface Authors {
+    id:       string;
+    type:     string;
+    relation: Relation[];
+    has_more: boolean;
+}
+
+export interface PublishDate {
+    id:   string;
+    type: string;
+    date: null;
+}
+
+export interface Published {
+    id:       string;
+    type:     string;
+    checkbox: boolean;
+}
+
+export interface ShortDescription {
+    id:        string;
+    type:      string;
+    rich_text: RichText[];
+}
+
+export interface Title {
+    id:    string;
+    type:  string;
+    title: RichText[];
+}
+
+export interface RichText {
+    type:        string;
+    text:        Text;
+    annotations: Annotations;
+    plain_text:  string;
+    href:        null;
+}
+
+export interface Annotations {
+    bold:          boolean;
+    italic:        boolean;
+    strikethrough: boolean;
+    underline:     boolean;
+    code:          boolean;
+    color:         string;
 }

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ParagraphBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+	import type { ParagraphBlockObjectResponse } from "$lib/types";
 	import Text from "./Text.svelte";
 
     export let paragraph: ParagraphBlockObjectResponse;

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { BlockObjectResponse, UserObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 	import Block from "./Block.svelte";
 	import TableOfContent from "./TableOfContent.svelte";
-	import type { FAQ, TableOfContentItems } from "$lib/types";
+	import type { FAQ, TableOfContentItems, UserObjectResponse } from "$lib/types";
 	import { Image } from "@unpic/svelte";
 	import Faq from "./FAQ.svelte";
 	import type { CustomBlockObjectResponse } from "../notion/api";

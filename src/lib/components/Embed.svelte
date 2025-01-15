@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { EmbedBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 	import { onMount } from "svelte";
 	import GenericEmbed from "./GenericEmbed.svelte";
 	import ShootmailEmbed from "./ShootmailEmbed.svelte";
+	import type { EmbedBlockObjectResponse } from "$lib/types";
     export let block:  EmbedBlockObjectResponse;
 
     const isImage = (url: string) => {

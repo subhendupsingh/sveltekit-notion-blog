@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import type { CodeBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+	import type { CodeBlockObjectResponse } from '$lib/types';
     import { codeToHtml } from 'shiki';
 	import { onMount } from "svelte";
 

@@ -1,4 +1,4 @@
-import type { BlockObjectResponse, DatabaseObjectResponse, PageObjectResponse, PartialBlockObjectResponse, PartialDatabaseObjectResponse, PartialPageObjectResponse, PartialUserObjectResponse, UserObjectResponse } from ".";
+import type { BlockObjectResponse, DatabaseObjectResponse, PageObjectResponse, PartialBlockObjectResponse, PartialDatabaseObjectResponse, PartialPageObjectResponse, PartialUserObjectResponse, RichTextItemResponse, UserObjectResponse } from ".";
 
 export function isFullBlock(
     response:
@@ -28,4 +28,29 @@ export function isFullUser(
     response: UserObjectResponse | PartialUserObjectResponse
 ): response is UserObjectResponse {
     return "type" in response
+}
+
+export const processAnnotations = (annotations: RichTextItemResponse["annotations"]) => {
+    let style =``;
+    if(annotations.bold) {
+        style += "font-weight: bold;";
+    }
+
+    if(annotations.italic) {
+        style += "font-style: italic;";
+    }
+
+    if(annotations.underline) {
+        style += "text-decoration: underline;";
+    }
+
+    if(annotations.strikethrough) {
+        style += "text-decoration: line-through;";
+    }
+
+    if(annotations.code) {
+        style += "font-family: monospace; color: #EB5757;";
+    }
+
+    return style;
 }

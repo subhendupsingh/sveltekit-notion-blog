@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { FAQ } from "$lib/types";
-	import { onMount } from "svelte";
 	import { JsonLd } from "svelte-meta-tags";
 
     export let faqs: FAQ[] = [];

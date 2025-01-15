@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { NumberedListItemBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+	import type { NumberedListItemBlockObjectResponse } from "$lib/types";
 	import Text from "./Text.svelte";
     export let block: NumberedListItemBlockObjectResponse;
 </script>
