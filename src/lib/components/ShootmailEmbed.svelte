@@ -1,5 +1,14 @@
 <script lang='ts'>
-    export let props: { url: string; image: string; title: string; description: string; };
+    interface Props {
+        props: {
+            url: string | undefined;
+            image: string | undefined;
+            title: string | undefined;
+            description: string | undefined;
+        }
+    }
+
+    let { props }: Props = $props();
 </script>
 
 <a href={props.url} target="_blank">

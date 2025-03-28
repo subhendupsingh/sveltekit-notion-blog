@@ -1,8 +1,12 @@
 <script lang="ts">
 	import type { Cover, Properties } from "$lib/types";
     import { Image } from "@unpic/svelte";
-    export let properties: Properties;
-    export let cover: Cover;
+    interface Props {
+        properties: Properties;
+        cover: Cover;
+    }
+
+    let { properties, cover }: Props = $props();
 </script>
 
 <article>

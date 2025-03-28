@@ -1,8 +1,12 @@
 <script lang="ts">
 	import type { BulletedListItemBlockObjectResponse } from "$lib/types";
 	import { processAnnotations } from "$lib/types/helpers";
-    export let block: BulletedListItemBlockObjectResponse;
-    let finalText = "";
+    interface Props {
+        block: BulletedListItemBlockObjectResponse;
+    }
+
+    let { block }: Props = $props();
+    let finalText = $state("");
     
     for (let index = 0; index < block.bulleted_list_item?.rich_text?.length; index++) {
         const rt = block.bulleted_list_item?.rich_text[index];

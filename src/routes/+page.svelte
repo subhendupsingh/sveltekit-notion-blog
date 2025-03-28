@@ -1,6 +1,6 @@
 <script lang="ts">
     import PostsList from '$lib/components/PostsList.svelte';
-    export let data;
+    let { data } = $props();
 </script>
 
 <PostsList {data} />

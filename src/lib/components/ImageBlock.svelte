@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type { ImageBlockObjectResponse } from "$lib/types";
 	import { Image } from "@unpic/svelte";
-    export let block: ImageBlockObjectResponse;
+    interface Props {
+        block: ImageBlockObjectResponse;
+    }
+
+    let { block }: Props = $props();
 </script>
 
 {#if block.image}

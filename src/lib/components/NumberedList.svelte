@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type { NumberedListItemBlockObjectResponse } from "$lib/types";
 	import Text from "./Text.svelte";
-    export let block: NumberedListItemBlockObjectResponse;
+    interface Props {
+        block: NumberedListItemBlockObjectResponse;
+    }
+
+    let { block }: Props = $props();
 </script>
 
 {#if block && block.numbered_list_item.rich_text.length>0}

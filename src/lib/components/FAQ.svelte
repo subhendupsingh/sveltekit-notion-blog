@@ -2,8 +2,12 @@
 	import type { FAQ } from "$lib/types";
 	import { JsonLd } from "svelte-meta-tags";
 
-    export let faqs: FAQ[] = [];
-    $: count = faqs.length;
+    interface Props {
+        faqs?: FAQ[];
+    }
+
+    let { faqs = [] }: Props = $props();
+    let count = $derived(faqs.length);
     /* $: (faqs?.shift()); */
     let loading = false;
     

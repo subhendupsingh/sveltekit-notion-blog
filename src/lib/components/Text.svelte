@@ -2,7 +2,11 @@
 	import type { RichTextItemResponse } from "$lib/types";
 	import { processAnnotations } from "$lib/types/helpers";
 
-    export let text: RichTextItemResponse;
+    interface Props {
+        text: RichTextItemResponse;
+    }
+
+    let { text }: Props = $props();
 </script>
 
 {#if text}

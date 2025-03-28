@@ -3,13 +3,17 @@
 	import GenericEmbed from "./GenericEmbed.svelte";
 	import ShootmailEmbed from "./ShootmailEmbed.svelte";
 	import type { EmbedBlockObjectResponse } from "$lib/types";
-    export let block:  EmbedBlockObjectResponse;
+    interface Props {
+        block: EmbedBlockObjectResponse;
+    }
+
+    let { block }: Props = $props();
 
     const isImage = (url: string) => {
         return url.indexOf(".jpg") >=0 || url.indexOf(".png") >=0 || url.indexOf(".jpeg") >=0 || url.indexOf(".webp") >=0 || url.indexOf(".avif") >=0
     }
 
-    let title: string, description: string, image: string, isEmbedImage: boolean = false;
+    let title: string | undefined  = $state(undefined), description: string | undefined = $state(undefined), image: string | undefined = $state(undefined), isEmbedImage: boolean = false;
 
     const fetchEmbedMetas = async (url: string) => {
         isEmbedImage = isImage(url);

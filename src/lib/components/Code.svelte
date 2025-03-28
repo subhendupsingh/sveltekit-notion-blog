@@ -3,8 +3,12 @@
     import { codeToHtml } from 'shiki';
 	import { onMount } from "svelte";
 
-    export let block: CodeBlockObjectResponse;
-    let html: string | undefined = undefined;
+    interface Props {
+        block: CodeBlockObjectResponse;
+    }
+
+    let { block }: Props = $props();
+    let html: string | undefined = $state(undefined);
     const getCodeHighlight = async () => {
         const html = await codeToHtml(block.code.rich_text[0].plain_text, {
             lang: block.code.language,

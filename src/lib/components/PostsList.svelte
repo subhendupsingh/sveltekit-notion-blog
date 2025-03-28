@@ -3,7 +3,11 @@
 	import type { PageData } from "../../routes/$types";
 	import ErrorPage from "./ErrorPage.svelte";
 	import { JsonLd, MetaTags } from "svelte-meta-tags";
-    export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 </script>
 
 <MetaTags

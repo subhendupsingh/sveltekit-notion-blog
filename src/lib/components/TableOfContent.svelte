@@ -1,6 +1,10 @@
 <script lang="ts">
 	import type { TableOfContentItems } from "$lib/types";
-    export let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
+    interface Props {
+        tableOfContent: (TableOfContentItems | undefined)[] | undefined;
+    }
+
+    let { tableOfContent }: Props = $props();
 
     //method to slugify
     function slugify(text: string) {

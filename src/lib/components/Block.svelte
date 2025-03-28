@@ -8,7 +8,11 @@
 	import type { CustomBlockObjectResponse } from "../notion/api";
 	import Code from "./Code.svelte";
 	import NumberedList from "./NumberedList.svelte";
-    export let block: CustomBlockObjectResponse;
+    interface Props {
+        block: CustomBlockObjectResponse;
+    }
+
+    let { block }: Props = $props();
 </script>
 
 

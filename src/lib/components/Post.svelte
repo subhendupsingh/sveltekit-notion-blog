@@ -6,13 +6,25 @@
 	import Faq from "./FAQ.svelte";
 	import type { CustomBlockObjectResponse } from "../notion/api";
 
-    export let blocks: CustomBlockObjectResponse[] | undefined;
-    export let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
-    export let title: string | undefined;
-    export let cover: string | undefined;
-    export let faqs: FAQ[] | undefined | null;
-    export let author: UserObjectResponse | undefined | null;
-    export let published: string | undefined | null;
+    interface Props {
+        blocks: CustomBlockObjectResponse[] | undefined;
+        tableOfContent: (TableOfContentItems | undefined)[] | undefined;
+        title: string | undefined;
+        cover: string | undefined;
+        faqs: FAQ[] | undefined | null;
+        author: UserObjectResponse | undefined | null;
+        published: string | undefined | null;
+    }
+
+    let {
+        blocks,
+        tableOfContent,
+        title,
+        cover,
+        faqs,
+        author,
+        published
+    }: Props = $props();
 </script>
 
 <div class="max-w-6xl mx-auto lg:text-lg">

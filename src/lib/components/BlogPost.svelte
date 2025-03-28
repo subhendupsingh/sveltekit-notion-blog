@@ -5,10 +5,12 @@
 	import type { TableOfContentItems } from "$lib/types";
 	import type { PageData } from "../../routes/blog/[slug]/$types";
 
-    export let data: PageData;
-    let tableOfContent: (TableOfContentItems | undefined)[] | undefined;
+  interface Props {
+    data: PageData;
+  }
 
-    $: tableOfContent = data?.blocks?.map((block)=>{
+  let { data }: Props = $props();
+    let tableOfContent: (TableOfContentItems | undefined)[] | undefined = $derived(data?.blocks?.map((block)=>{
         if(block.type==="heading_1"){
             return {
                 type: block.type,
@@ -30,7 +32,9 @@
         }else{
             return undefined;
         }
-    });
+    }));
+
+    
 </script>
 
 <MetaTags

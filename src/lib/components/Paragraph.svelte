@@ -2,7 +2,11 @@
 	import type { ParagraphBlockObjectResponse } from "$lib/types";
 	import Text from "./Text.svelte";
 
-    export let paragraph: ParagraphBlockObjectResponse;
+    interface Props {
+        paragraph: ParagraphBlockObjectResponse;
+    }
+
+    let { paragraph }: Props = $props();
 </script>
 
 {#if paragraph?.paragraph?.rich_text?.length > 0}

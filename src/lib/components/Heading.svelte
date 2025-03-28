@@ -3,7 +3,11 @@
 	import { processAnnotations } from "$lib/types/helpers";
 
 
-    export let heading: Heading1BlockObjectResponse | Heading2BlockObjectResponse | Heading3BlockObjectResponse;
+    interface Props {
+        heading: Heading1BlockObjectResponse | Heading2BlockObjectResponse | Heading3BlockObjectResponse;
+    }
+
+    let { heading }: Props = $props();
 
     //method to slugify
     function slugify(text: string) {
