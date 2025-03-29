@@ -2,8 +2,6 @@ import { getBlocks, getBlogSlugs, getDatabaseById, getFAQs, getPageBySlug, group
 import type { ServerLoadEvent } from "@sveltejs/kit";
 import BlogPost from "$lib/components/BlogPost.svelte";
 import PostsList from "$lib/components/PostsList.svelte";
-import '@fontsource-variable/inter';
-import "./index.css";
 import { isFullUser } from "./types/helpers";
 
 type Tokens = { notionToken: string, databaseId: string, vercelByPassToken?: string };

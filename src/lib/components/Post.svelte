@@ -27,29 +27,29 @@
     }: Props = $props();
 </script>
 
-<div class="max-w-6xl mx-auto lg:text-lg">
+<div class="sk-blog-post-container">
     {#if blocks && blocks.length >0}
-        <article class="mt-8 mx-auto">
+        <article class="sk-blog-post">
             {#if title}
                 <h1 class="sk-blog-h1">{title}</h1>
             {/if}
 
-            <div class="flex justify-between items-center">
+            <div class="sk-blog-post-header">
                 {#if published}
-                    <small class="font-public text-gray-600 text-sm py-4">Published : {published}</small>
+                    <small class="sk-blog-published">Published : {published}</small>
                 {/if}
 
                 {#if author}
                     <div class="flex gap-2 items-center">
-                        <img src={author.avatar_url} alt={author.name} class="rounded-full h-5 w-5 aspect-square" />
-                        <small class="font-public text-gray-600 text-sm">{ author.name }</small>
+                        <img src={author.avatar_url} alt={author.name} class="sk-blog-avatar" />
+                        <small class="sk-blog-author">{ author.name }</small>
                     </div>
                 {/if}
             </div>
             
 
             {#if cover}
-                <Image src={cover} layout="fullWidth" aspectRatio={16/9} class="mt-6 rounded-xl aspect-video object-cover max-h-[500px] w-full" />
+                <Image src={cover} layout="fullWidth" aspectRatio={16/9} class="my-6 rounded-xl aspect-video object-cover max-h-[500px] w-full sk-blog-post-cover-image" />
             {/if}
 
             <TableOfContent {tableOfContent} />
@@ -59,7 +59,6 @@
             {/each}
 
             {#if faqs && faqs.length > 0}
-            <!-- {JSON.stringify(faqs)} -->
                 <Faq {faqs} />
             {/if}
         </article>

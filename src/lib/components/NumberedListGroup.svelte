@@ -9,9 +9,9 @@
 </script>
 
 {#if block && block.items.length> 0}
-    <ul class="list-inside py-2 list-decimal marker:font-inter marker:text-base marker:text-gray-600 dark:marker:text-gray-200">
+    <ul class="sk-blog-list-ul sk-blog-numbered-list">
         {#each block.items as item}
-            <li class="list-item mb-2">
+            <li class="sk-blog-list-li">
                 {#if item.numbered_list_item.rich_text.length > 0}
                     {#each item.numbered_list_item.rich_text as text }
                         <Text {text} />

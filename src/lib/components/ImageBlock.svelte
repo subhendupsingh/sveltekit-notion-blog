@@ -10,12 +10,12 @@
 
 {#if block.image}
     {#if block.image.type=="file"}
-        <Image src={block.image.file.url} layout="fullWidth" aspectRatio={0} class="aspect-auto object-contain rounded-xl mt-4" />
+        <Image src={block.image.file.url} layout="fullWidth" aspectRatio={0} class="aspect-auto object-contain rounded-xl my-4 sk-blog-post-image" />
         {#if block.image.caption?.length > 0}
             <p class="w-full text-xs text-gray-400 text-center">{block.image.caption?.[0].plain_text}</p>
         {/if}
     {:else if block.image.type=="external"}
-        <Image src={block.image.external.url} layout="fullWidth" aspectRatio={0} class="aspect-auto object-contain rounded-xl mt-4" />
+        <Image src={block.image.external.url} layout="fullWidth" aspectRatio={0} class="aspect-auto object-contain rounded-xl my-4 sk-blog-post-image" />
         {#if block.image.caption?.length > 0}
             <p class="w-full text-xs text-gray-400 text-center">{block.image.caption?.[0].plain_text}</p>
         {/if}

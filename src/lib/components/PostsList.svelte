@@ -54,28 +54,28 @@
         "url": data?.seo?.siteUrl ?? "https://example.com",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": data?.seo?.siteUrl+"/blog" ?? "https://example.com/blog"
+            "@id": data?.seo?.siteUrl ? data?.seo?.siteUrl+"/blog" : "https://example.com/blog"
         },
     }}
 /> 
 
 <!-- Post List -->
 {#if data.pages}
-    <div class="min-h-screen py-8 flex flex-col gap-20 relative overflow-hidden lg:py-8">
-        <div class="relative w-full px-6 py-12 md:max-w-3xl mx-auto lg:max-w-4xl lg:pt-12 lg:pb-28">
-            <div class="flex flex-col gap-4">
+    <div class="sk-blog-posts-list">
+        <div class="sk-blog-posts-list-container">
+            <div class="sk-blog-posts-list-header">
                 {#if data.settings.blogTitle}
-                    <h1 class="font-bold text-4xl">{ data.settings.blogTitle }</h1>
+                    <h1 class="sk-blog-h1">{ data.settings.blogTitle }</h1>
                 {/if}
         
                 {#if data.settings.blogDescription}
-                    <p class="text-lg">
+                    <p class="sk-blog-body">
                         { data.settings.blogDescription }
                     </p>
                 {/if}
             </div>
 
-            <div class="flex flex-col gap-12 pt-8">
+            <div class="sk-blog-posts-list-content">
                 {#each data.pages as page}
                     <PostItem properties = { page.properties } cover = { page.cover } />
                 {/each}

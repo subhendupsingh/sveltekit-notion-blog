@@ -93,8 +93,8 @@
 
 <ErrorPage {data} />
 
-<div class="min-h-screen py-8 flex flex-col justify-center relative overflow-hidden lg:py-12">
-    <div class="relative w-full px-6 py-12 md:max-w-3xl md:mx-auto lg:max-w-4xl lg:pt-16 lg:pb-28">
+<div class="sk-blog-blog-post-parent">
+    <div class="sk-blog-blog-post-container">
         <Post 
             blocks={data.blocks} 
             {tableOfContent} 
