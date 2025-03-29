@@ -1,6 +1,6 @@
 {
 	"name": "sveltekit-notion-blog",
-	"version": "0.2.4",
+	"version": "0.2.5",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
@@ -54,8 +54,7 @@
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
-	"dependencies": {
-	},
+	"dependencies": {},
 	"homepage": "https://sveltekit-notion-blog.netlify.app/",
 	"description": "A plug and play library for setting up blogs in subdirectory or main directory in Sveltekit projects using Notion as CMS.",
 	"keywords": [
